@@ -1,7 +1,0 @@
-We are looking for a Python Developer with skills in:
-Python
-Machine Learning
-SQL
-Docker
-FastAPI
-Kubernetes
