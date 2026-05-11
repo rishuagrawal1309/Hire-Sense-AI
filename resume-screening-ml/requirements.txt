@@ -4,3 +4,6 @@ PyMuPDF
 spacy
 pandas
 numpy
+fastapi
+uvicorn
+python-multipart

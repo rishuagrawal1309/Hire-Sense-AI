@@ -1,6 +1,8 @@
 import fitz
 import re
+
 from app.utils import clean_text
+from app.skills import SKILLS
 
 
 def extract_text_from_pdf(pdf_path):
@@ -37,9 +39,22 @@ def extract_phone(text):
 
 
 def extract_name(text):
-    lines = text.split()
+    words = text.split()
 
-    if len(lines) >= 2:
-        return lines[0].title() + " " + lines[1].title()
+    if len(words) >= 2:
+        return words[0].title() + " " + words[1].title()
 
     return "Not Found"
+
+
+def extract_skills(text):
+
+    text = text.lower()
+
+    found_skills = []
+
+    for skill in SKILLS:
+        if skill.lower() in text:
+            found_skills.append(skill)
+
+    return list(set(found_skills))
