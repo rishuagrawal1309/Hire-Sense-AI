@@ -1,2 +1,9 @@
+- name: Restart Minikube
+  command: minikube start
+
+- name: Wait For Kubernetes
+  pause:
+    seconds: 30
+
 - name: Deploy Kubernetes Resources
-  shell: kubectl apply -f ../k8s/
+  command: kubectl apply -f ../k8s/
