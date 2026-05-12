@@ -15,6 +15,18 @@ pipeline {
             }
         }
 
+        stage('Run Backend Tests') {
+            steps {
+
+                dir('backend') {
+
+                sh 'pip install -r requirements.txt'
+
+                sh 'pytest'
+                }
+            }
+        }
+
         stage('Build Backend Docker Image') {
             steps {
                 dir('backend') {
