@@ -5,3 +5,5 @@ sentence-transformers
 scikit-learn
 PyMuPDF
 numpy
+pytest
+httpx
