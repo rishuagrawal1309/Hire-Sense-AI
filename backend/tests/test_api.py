@@ -5,6 +5,6 @@ client = TestClient(app)
 
 def test_home():
 
-    response = client.get("/")
+    response = client.get("/api/")
 
     assert response.status_code == 200
