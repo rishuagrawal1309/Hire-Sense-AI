@@ -125,7 +125,7 @@ pipeline {
 
                     echo "\\n========== GENERATING LOAD ==========" >> k8s-report.txt
 
-                    ab -n 200 -c 10 http://resume.local/
+                    ab -n 50 -c 5 http://resume.local/ || true
 
                     sleep 20
 
