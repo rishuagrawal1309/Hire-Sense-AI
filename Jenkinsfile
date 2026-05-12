@@ -107,7 +107,41 @@ pipeline {
                     '''
                 }
             }
-        }    
+        } 
+
+        stage('Kubernetes Validation') {
+
+            steps {
+
+                sh '''
+
+                    echo "========== BEFORE LOAD ==========" > k8s-report.txt
+
+                    kubectl get pods >> k8s-report.txt
+
+                    kubectl get hpa >> k8s-report.txt
+
+                    kubectl top pods >> k8s-report.txt
+
+                    echo "\\n========== GENERATING LOAD ==========" >> k8s-report.txt
+
+                    ab -n 200 -c 10 http://resume.local/
+
+                    sleep 20
+
+                    echo "\\n========== AFTER LOAD ==========" >> k8s-report.txt
+
+                    kubectl get pods >> k8s-report.txt
+
+                    kubectl get hpa >> k8s-report.txt
+
+                    kubectl top pods >> k8s-report.txt
+
+                    cat k8s-report.txt
+
+                '''
+            }
+        }   
 
     }
 
