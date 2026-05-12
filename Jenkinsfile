@@ -107,7 +107,7 @@ pipeline {
                     '''
                 }
             }
-        } 
+        }
 
         stage('Kubernetes Validation') {
 
@@ -141,7 +141,7 @@ pipeline {
 
                 '''
             }
-        }   
+        }
 
     }
 
@@ -149,14 +149,67 @@ pipeline {
 
         success {
 
-            echo 'Pipeline executed successfully.'
+            emailext(
 
+                subject: "SUCCESS: Resume Parser Pipeline #${BUILD_NUMBER}",
+
+                body: """
+
+                Build Status: SUCCESS
+
+                Project: Hire-Sense-AI
+
+                Build Number: ${BUILD_NUMBER}
+
+                Jenkins Job: ${JOB_NAME}
+
+                Kubernetes deployment completed successfully.
+
+                Kubernetes validation executed successfully.
+
+                Check attached report for Kubernetes details.
+
+                """,
+
+                attachmentsPattern: 'k8s-report.txt',
+
+                to: 'YOUR_EMAIL@gmail.com'
+
+            )
+
+            echo 'Pipeline executed successfully.'
         }
 
         failure {
 
-            echo 'Pipeline failed.'
+            emailext(
 
+                subject: "FAILED: Resume Parser Pipeline #${BUILD_NUMBER}",
+
+                body: """
+
+                Build Status: FAILED
+
+                Project: Hire-Sense-AI
+
+                Build Number: ${BUILD_NUMBER}
+
+                Jenkins Job: ${JOB_NAME}
+
+                Please check Jenkins logs for failure details.
+
+                """,
+
+                to: 'YOUR_EMAIL@gmail.com'
+
+            )
+
+            echo 'Pipeline failed.'
+        }
+
+        always {
+
+            cleanWs()
         }
     }
 }
