@@ -20,9 +20,19 @@ pipeline {
 
                 dir('backend') {
 
-                    sh 'python3 -m pip install -r requirements.txt'
+                    sh '''
+            
+                        python3 -m venv venv
 
-                    sh 'python3 -m pytest'
+                        source venv/bin/activate
+
+                        python3 -m pip install --upgrade pip
+
+                        pip install -r requirements.txt
+
+                        pytest
+
+                    '''
                 }
             }
         }
