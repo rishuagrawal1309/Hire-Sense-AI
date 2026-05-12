@@ -102,14 +102,12 @@ pipeline {
 
                     sh '''
 
-                    
-
-                    ansible-playbook -i ansible/inventory.ini ansible/playbook.yml
+                    ansible-playbook -i inventory.ini playbook.yml
 
                     '''
                 }
             }
-        }
+        }    
 
     }
 
