@@ -1,0 +1,2 @@
+- name: Deploy Kubernetes Resources
+  shell: kubectl apply -f /home/swayampalrecha/Desktop/Hire-Sense-AI/k8s/

@@ -1,0 +1,2 @@
+- name: Start Minikube
+  shell: minikube start
