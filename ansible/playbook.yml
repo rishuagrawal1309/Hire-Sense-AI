@@ -3,6 +3,4 @@
   become: false
 
   roles:
-    - docker
-    - kubernetes
     - app-deploy
