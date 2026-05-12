@@ -30,6 +30,8 @@ pipeline {
 
                         pip install -r requirements.txt
 
+                        export PYTHONPATH=.
+
                         pytest
 
                     '''
