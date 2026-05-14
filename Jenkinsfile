@@ -3,19 +3,26 @@ pipeline {
     agent any
 
     environment {
+
         FRONTEND_IMAGE = "swayam614/resume-frontend:latest"
+
         BACKEND_IMAGE = "swayam614/resume-backend:latest"
+
     }
 
     stages {
 
         stage('Clone Repository') {
+
             steps {
+
                 checkout scm
+
             }
         }
 
         stage('Run Backend Tests') {
+
             steps {
 
                 dir('backend') {
@@ -41,7 +48,25 @@ pipeline {
             }
         }
 
+        stage('Frontend Build Test') {
+
+            steps {
+
+                dir('frontend') {
+
+                    sh '''
+
+                        npm install
+
+                        npm run build
+
+                    '''
+                }
+            }
+        }
+
         stage('Build Backend Docker Image') {
+
             steps {
 
                 dir('backend') {
@@ -53,6 +78,7 @@ pipeline {
         }
 
         stage('Build Frontend Docker Image') {
+
             steps {
 
                 dir('frontend') {
@@ -64,45 +90,58 @@ pipeline {
         }
 
         stage('Push Backend Docker Image') {
+
             steps {
 
                 withCredentials([usernamePassword(
+
                     credentialsId: 'dockerhub-creds',
+
                     usernameVariable: 'DOCKER_USER',
+
                     passwordVariable: 'DOCKER_PASS'
+
                 )]) {
 
                     sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
 
                     sh 'docker push $BACKEND_IMAGE'
+
                 }
             }
         }
 
         stage('Push Frontend Docker Image') {
+
             steps {
 
                 withCredentials([usernamePassword(
+
                     credentialsId: 'dockerhub-creds',
+
                     usernameVariable: 'DOCKER_USER',
+
                     passwordVariable: 'DOCKER_PASS'
+
                 )]) {
 
                     sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
 
                     sh 'docker push $FRONTEND_IMAGE'
+
                 }
             }
         }
 
         stage('Deploy Using Ansible') {
+
             steps {
 
                 dir('ansible') {
 
                     sh '''
 
-                    ansible-playbook -i inventory.ini playbook.yml
+                        ansible-playbook -i inventory.ini playbook.yml
 
                     '''
                 }
@@ -115,7 +154,9 @@ pipeline {
 
                 sh '''
 
-                    echo "========== BEFORE LOAD ==========" > k8s-report.txt
+                    rm -f k8s-report.txt
+
+                    echo "========== BEFORE LOAD ==========" >> k8s-report.txt
 
                     kubectl get pods >> k8s-report.txt
 
@@ -139,10 +180,11 @@ pipeline {
 
                     cat k8s-report.txt
 
+                    ls -lh k8s-report.txt
+
                 '''
             }
         }
-
     }
 
     post {
@@ -171,7 +213,7 @@ pipeline {
 
                 """,
 
-                attachmentsPattern: 'k8s-report.txt',
+                attachmentsPattern: '**/k8s-report.txt',
 
                 to: 'swayampalrecha6@gmail.com'
 
@@ -210,6 +252,7 @@ pipeline {
         always {
 
             cleanWs()
+
         }
     }
 }
