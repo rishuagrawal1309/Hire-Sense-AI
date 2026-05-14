@@ -173,7 +173,7 @@ pipeline {
 
                 attachmentsPattern: 'k8s-report.txt',
 
-                to: 'YOUR_EMAIL@gmail.com'
+                to: 'swayampalrecha6@gmail.com'
 
             )
 
@@ -200,7 +200,7 @@ pipeline {
 
                 """,
 
-                to: 'YOUR_EMAIL@gmail.com'
+                to: 'swayampalrecha6@gmail.com'
 
             )
 
