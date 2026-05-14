@@ -4,6 +4,8 @@ import shutil
 from fastapi import APIRouter, UploadFile, File
 
 from app.services.resume_service import process_resumes
+from app.config import MODEL_NAME
+from app.services.resume_service import parse_resume_data
 
 
 router = APIRouter()
@@ -62,3 +64,40 @@ async def rank_resumes(
     return {
         "rankings": results
     }
+
+@router.get("/health")
+def health_check():
+
+    return {
+        "status": "healthy",
+        "service": "resume-backend"
+    }
+
+
+@router.get("/model-info")
+def model_info():
+
+    return {
+        "model_name": MODEL_NAME,
+        "service": "AI Resume Screening System"
+    }
+
+@router.post("/parse-resume")
+async def parse_resume(
+    resume: UploadFile = File(...)
+):
+
+    resume_path = os.path.join(
+        UPLOAD_DIR,
+        resume.filename
+    )
+
+    with open(resume_path, "wb") as buffer:
+        shutil.copyfileobj(
+            resume.file,
+            buffer
+        )
+
+    result = parse_resume_data(resume_path)
+
+    return result

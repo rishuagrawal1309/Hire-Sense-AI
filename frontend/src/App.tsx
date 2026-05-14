@@ -3,6 +3,7 @@ import { useState } from "react"
 import Navbar from "./components/Navbar"
 import UploadForm from "./components/UploadForm"
 import ResultsTable from "./components/ResultsTable"
+import SystemStatus from "./components/SystemStatus"
 
 import type { Candidate } from "./types/candidate"
 
@@ -18,6 +19,8 @@ function App() {
       <Navbar />
 
       <div className="max-w-6xl mx-auto p-6">
+
+        <SystemStatus />
 
         <UploadForm
           setCandidates={setCandidates}

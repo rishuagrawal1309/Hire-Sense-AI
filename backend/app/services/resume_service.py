@@ -14,6 +14,31 @@ from app.matcher import (
     calculate_final_score
 )
 
+def parse_resume_data(resume_path):
+
+    resume_text = extract_text_from_pdf(resume_path)
+
+    return {
+        "name": extract_name(resume_text),
+        "email": extract_email(resume_text),
+        "phone": extract_phone(resume_text),
+        "skills": extract_skills(resume_text)
+    }
+
+def generate_resume_stats(results):
+
+    total_candidates = len(results)
+
+    average_score = round(
+        sum(r["final_score"] for r in results) / total_candidates,
+        2
+    )
+
+    return {
+        "total_candidates": total_candidates,
+        "average_score": average_score
+    }
+
 
 def process_resumes(job_description, resume_files):
 
