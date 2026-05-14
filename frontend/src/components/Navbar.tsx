@@ -2,15 +2,30 @@ function Navbar() {
 
   return (
 
-    <nav className="bg-blue-600 text-white px-6 py-4 shadow-md flex justify-between items-center">
+    <nav className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white shadow-xl">
 
-      <h1 className="text-2xl font-bold">
-        AI Resume Screening System
-      </h1>
+      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
 
-      <div className="text-sm">
+        <div>
 
-        FastAPI • Kubernetes • Jenkins
+          <h1 className="text-3xl font-bold tracking-wide">
+            Hire-Sense AI
+          </h1>
+
+          <p className="text-sm text-blue-100 mt-1">
+            Intelligent Resume Screening Platform
+          </p>
+
+        </div>
+
+        <div className="hidden md:flex gap-6 text-sm font-medium text-blue-100">
+
+          <span>FastAPI</span>
+          <span>Kubernetes</span>
+          <span>Jenkins</span>
+          <span>Docker</span>
+
+        </div>
 
       </div>
 

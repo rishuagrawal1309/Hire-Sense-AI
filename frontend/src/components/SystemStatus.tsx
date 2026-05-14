@@ -46,39 +46,51 @@ function SystemStatus() {
 
   return (
 
-    <div className="bg-white p-6 rounded-xl shadow-md mb-6">
+    <div className="bg-white rounded-2xl shadow-xl p-6 border border-slate-200">
 
-      <h2 className="text-2xl font-bold mb-4">
-        System Status
-      </h2>
+      <div className="flex items-center justify-between mb-6">
 
-      <div className="space-y-2">
+        <h2 className="text-2xl font-bold text-slate-800">
+          System Status
+        </h2>
 
-        <p>
+        <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+          Live
+        </div>
+
+      </div>
+
+      <div className="space-y-4 text-slate-700">
+
+        <div className="flex justify-between items-center">
           <span className="font-semibold">
-            Backend Status:
-          </span>{" "}
+            Backend Status
+          </span>
 
-          <span className="text-green-600">
+          <span className="text-green-600 font-bold">
             {status}
           </span>
-        </p>
+        </div>
 
-        <p>
+        <div className="flex justify-between items-center">
           <span className="font-semibold">
-            AI Model:
-          </span>{" "}
+            AI Model
+          </span>
 
-          {modelName}
-        </p>
+          <span>
+            {modelName}
+          </span>
+        </div>
 
-        <p>
+        <div className="flex justify-between items-center">
           <span className="font-semibold">
-            Architecture:
-          </span>{" "}
+            Architecture
+          </span>
 
-          FastAPI + Kubernetes + Jenkins
-        </p>
+          <span>
+            Microservices
+          </span>
+        </div>
 
       </div>
 

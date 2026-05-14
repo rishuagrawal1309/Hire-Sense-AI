@@ -79,20 +79,20 @@ function UploadForm({
 
   return (
 
-    <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-2xl">
+    <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-200">
 
-      <h2 className="text-2xl font-bold mb-6">
-        Upload Job Description & Resumes
+      <h2 className="text-3xl font-bold text-slate-800 mb-8">
+        Resume Analysis
       </h2>
 
       <form
         onSubmit={handleSubmit}
-        className="space-y-6"
+        className="space-y-8"
       >
 
         <div>
 
-          <label className="block mb-2 font-semibold">
+          <label className="block mb-3 text-lg font-semibold text-slate-700">
             Upload Job Description
           </label>
 
@@ -106,15 +106,15 @@ function UploadForm({
                   : null
               )
             }
-            className="w-full border p-3 rounded-lg"
+            className="w-full border-2 border-slate-200 p-4 rounded-xl bg-slate-50"
           />
 
         </div>
 
         <div>
 
-          <label className="block mb-2 font-semibold">
-            Upload Resumes
+          <label className="block mb-3 text-lg font-semibold text-slate-700">
+            Upload Resume PDFs
           </label>
 
           <input
@@ -126,7 +126,7 @@ function UploadForm({
                 e.target.files
               )
             }
-            className="w-full border p-3 rounded-lg"
+            className="w-full border-2 border-slate-200 p-4 rounded-xl bg-slate-50"
           />
 
         </div>
@@ -134,11 +134,11 @@ function UploadForm({
         <button
           type="submit"
           disabled={loading}
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+          className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl text-lg font-bold hover:scale-[1.02] transition-all duration-300 shadow-lg"
         >
 
           {loading
-            ? "Analyzing..."
+            ? "Analyzing Resumes..."
             : "Analyze Resumes"}
 
         </button>
